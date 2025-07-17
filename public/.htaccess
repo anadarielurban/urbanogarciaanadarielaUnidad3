@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Establece la base correcta para tu proyecto
+    RewriteBase /proyecto_unidad3_DWP/public/
+    
+    # Redirige todas las solicitudes al front controller (index.php)
+    # excepto para archivos y directorios que existen físicamente
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+    
+    # Asegura que los archivos .htaccess y .env no sean accesibles
+    <FilesMatch "\.(htaccess|env)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# Configuraciones adicionales recomendadas
+<IfModule mod_php7.c>
+    php_flag display_errors On
+    php_value error_reporting E_ALL
+</IfModule>
+
+# Configura el tipo MIME para archivos comunes
+AddType text/css .css
+AddType application/javascript .js
