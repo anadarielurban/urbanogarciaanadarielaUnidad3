@@ -10,7 +10,7 @@ class AuthController extends BaseController
     {
         // Si ya está autenticado, redirigir al dashboard correspondiente
         if ($this->isAuthenticated()) {
-            $this->redirectToDashboard($_SESSION['user']->role);
+            $this->redirectToDashboard($_SESSION['user']['role']);
         }
         
         $this->render('auth/login', [
@@ -63,7 +63,12 @@ class AuthController extends BaseController
             
             // Iniciar sesión de forma segura
             $this->startSecureSession();
-            $_SESSION['User'] = $user->toArray();
+            $_SESSION['user'] = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role
+            ];
             session_regenerate_id(true);
             
             // Redirigir según rol
@@ -107,7 +112,11 @@ class AuthController extends BaseController
             return;
         }
 
-        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        // Reemplazo de FILTER_SANITIZE_STRING (obsoleto)
+        $name = $_POST['name'] ?? '';
+        $name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $name = trim($name);
+        
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $password = $_POST['password'] ?? '';
         $confirm_password = $_POST['confirm_password'] ?? '';
@@ -159,7 +168,12 @@ class AuthController extends BaseController
             
             // Autenticar y redirigir
             $this->startSecureSession();
-            $_SESSION['user'] = $user->toArray();
+            $_SESSION['user'] = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role
+            ];
             session_regenerate_id(true);
             $this->redirectToDashboard($user->role);
             
