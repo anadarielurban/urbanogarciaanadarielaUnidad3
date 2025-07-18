@@ -82,6 +82,10 @@ function sendResponse($title, $content, $status = 200) {
                                 <i class="fas fa-sign-in-alt text-blue-200"></i>
                                 <span>Login</span>
                             </a>
+                            <a href="/proyecto_unidad3_DWP/public/register" class="px-4 py-2 rounded-lg hover:bg-blue-800/50 transition-all duration-300 flex items-center space-x-1">
+                                <i class="fas fa-user-plus text-blue-200"></i>
+                                <span>Registro</span>
+                            </a>
                             <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-800/50 transition-all duration-300 flex items-center space-x-1">
                                 <i class="fas fa-book text-blue-200"></i>
                                 <span>Catálogo</span>
@@ -188,8 +192,8 @@ switch ($path) {
                             <a href="/proyecto_unidad3_DWP/public/login" class="btn-hover bg-white text-blue-800 hover:bg-blue-100 font-semibold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 inline-flex items-center justify-center">
                                 <i class="fas fa-sign-in-alt mr-2"></i> Acceder
                             </a>
-                            <a href="#" class="btn-hover bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-800 font-semibold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 inline-flex items-center justify-center">
-                                <i class="fas fa-book-open mr-2"></i> Explorar
+                            <a href="/proyecto_unidad3_DWP/public/register" class="btn-hover bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-800 font-semibold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 inline-flex items-center justify-center">
+                                <i class="fas fa-user-plus mr-2"></i> Registrarse
                             </a>
                         </div>
                     </div>
@@ -386,7 +390,90 @@ switch ($path) {
                         </form>
                         
                         <div class="px-8 pb-6 text-center">
-                            <p class="text-gray-600 text-sm">¿No tienes una cuenta? <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Regístrate</a></p>
+                            <p class="text-gray-600 text-sm">¿No tienes una cuenta? <a href="/proyecto_unidad3_DWP/public/register" class="text-blue-600 hover:text-blue-800 font-medium">Regístrate</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ');
+        break;
+        
+    case '/proyecto_unidad3_DWP/public/register':
+        sendResponse('Registro', '
+            <div class="bg-gradient-to-br from-blue-50 to-gray-50 py-16 min-h-full">
+                <div class="container mx-auto px-6">
+                    <div class="max-w-md mx-auto bg-white rounded-xl shadow-2xl overflow-hidden animate__animated animate__fadeIn">
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-400 p-6 text-white text-center">
+                            <h2 class="title-font text-2xl font-bold">Crear Cuenta</h2>
+                            <p class="text-blue-100">Regístrate para acceder a todos nuestros recursos</p>
+                        </div>
+                        
+                        <form method="post" class="p-8 space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                    <input type="text" id="name" name="name" required 
+                                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
+                                        placeholder="Tu nombre completo">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                    </div>
+                                    <input type="email" id="email" name="email" required 
+                                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
+                                        placeholder="tu@email.com">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-lock text-gray-400"></i>
+                                    </div>
+                                    <input type="password" id="password" name="password" required 
+                                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
+                                        placeholder="••••••••">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirmar contraseña</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-lock text-gray-400"></i>
+                                    </div>
+                                    <input type="password" id="confirm-password" name="confirm-password" required 
+                                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
+                                        placeholder="••••••••">
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
+                                <label for="terms" class="ml-2 block text-sm text-gray-700">
+                                    Acepto los <a href="#" class="text-blue-600 hover:text-blue-800">Términos y Condiciones</a>
+                                </label>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" 
+                                    class="btn-hover w-full bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white font-semibold py-3 px-4 rounded-lg shadow-lg transition duration-300 flex items-center justify-center">
+                                    <i class="fas fa-user-plus mr-2"></i> Registrarse
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="px-8 pb-6 text-center">
+                            <p class="text-gray-600 text-sm">¿Ya tienes una cuenta? <a href="/proyecto_unidad3_DWP/public/login" class="text-blue-600 hover:text-blue-800 font-medium">Inicia sesión</a></p>
                         </div>
                     </div>
                 </div>
